@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	    this.transform.localPosition = new Vector2(GameData.CurrentGpsPosition.OSMTileX + GameData.CurrentGpsPosition.OSMOnTilePosX, GameData.CurrentGpsPosition.OSMTileY + 1 - GameData.CurrentGpsPosition.OSMOnTilePosY);
-    }
+        //TODO: make position calculation more streamlined
+        this.transform.localPosition = new Vector2(GameData.CurrentGpsPosition.OSMTileX + GameData.CurrentGpsPosition.OSMOnTilePosX, (GameData.CurrentGpsPosition.OSMTileY - 1 + GameData.CurrentGpsPosition.OSMOnTilePosY)*-1);
+	}
 }

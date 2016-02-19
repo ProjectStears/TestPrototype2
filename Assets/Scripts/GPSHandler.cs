@@ -53,9 +53,12 @@ public class GPSHandler : MonoBehaviour
 
             GameData.CurrentGpsPosition = locationData;
         }
-
+//Debug GPS stuff here ...
         else
         {
+            //GameData.CurrentGpsPosition.Latitude += 0.0002f * Time.deltaTime;
+            //GameData.CurrentGpsPosition.Longitude += 0.0002f * Time.deltaTime;
+
             if (goodFixTimer > 0)
             {
                 goodFixTimer -= Time.deltaTime;
