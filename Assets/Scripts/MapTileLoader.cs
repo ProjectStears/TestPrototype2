@@ -47,6 +47,10 @@ public class MapTileLoader : MonoBehaviour {
         WWW www = new WWW(url);
         yield return www;
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-        renderer.sprite = Sprite.Create(www.texture, new Rect(0,0,256,256), new Vector2(0,0), 256);
+
+        var tex = www.texture;
+        tex.filterMode = Config.MapFilterMode;
+
+        renderer.sprite = Sprite.Create(tex, new Rect(0,0,256,256), new Vector2(0,0), 256);
     }
 }

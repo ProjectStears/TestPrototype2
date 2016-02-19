@@ -9,11 +9,13 @@ public static class Config
     public static Vector2 MaxCameraOffset;
 
     public static float MapServiceRunAtMostEvery = 5f;
-    public static int MapLoadSourroundingTiles = 5;
+    public static int MapLoadSourroundingTiles = 2;
     public static float MapTileStartLoadingTimeout = 5;
+    public static FilterMode MapFilterMode = FilterMode.Bilinear;
 
     public static bool UseDebugGpsPosition;
     public static Helper.LocationData DebugGpsPosition;
+
 
     public static List<Helper.TowerData> towers;
 
