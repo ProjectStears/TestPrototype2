@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class Helper {
@@ -44,5 +45,43 @@ public static class Helper {
         public string name;
         public float Latitude;
         public float Longitude;
+    }
+
+    public class ThreeDimensionalDictionary<K1, K2, K3, V>
+    {
+        private Dictionary<K1, Dictionary<K2, Dictionary<K3, V>>> _dict = new Dictionary<K1, Dictionary<K2, Dictionary<K3, V>>>();
+
+        public bool Check(K1 k1, K2 k2, K3 k3)
+        {
+            try
+            {
+                if (_dict[k1][k2][k3] != null)
+                    return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return false;
+        }
+
+        public V Get(K1 k1, K2 k2, K3 k3)
+        {
+            if (Check(k1, k2, k3))
+                return _dict[k1][k2][k3];
+
+            return default(V);
+        }
+
+        public void Add(K1 k1, K2 k2, K3 k3, V v)
+        {
+            var k3v = new Dictionary<K3, V>();
+            k3v.Add(k3, v);
+
+            var k2k3v = new Dictionary<K2, Dictionary<K3, V>>();
+            k2k3v.Add(k2, k3v);
+
+            _dict.Add(k1, k2k3v);
+        }
     }
 }
