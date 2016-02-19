@@ -2,11 +2,11 @@
 
 public class GPSHandler : MonoBehaviour
 {
-    public float goodFixTimer;
+    private float _goodFixTimer;
 
     void Start()
     {
-        goodFixTimer = Config.TimeToGoodGPSFix;
+        _goodFixTimer = Config.TimeToGoodGpsFix;
 
         if (Config.UseDebugGpsPosition)
         {
@@ -33,11 +33,11 @@ public class GPSHandler : MonoBehaviour
             locationData.Timestamp = Input.location.lastData.timestamp;
             locationData.Status = Input.location.status.ToString();
 
-            if (locationData.HorizontalAccuracy < Config.MinGPSAcc && locationData.VerticalAccuracy < Config.MinGPSAcc)
+            if (locationData.HorizontalAccuracy < Config.MinGpsAcc && locationData.VerticalAccuracy < Config.MinGpsAcc)
             {
-                if (goodFixTimer > 0)
+                if (_goodFixTimer > 0)
                 {
-                    goodFixTimer -= Time.deltaTime;
+                    _goodFixTimer -= Time.deltaTime;
                     locationData.GoodFix = false;
                 }
                 else
@@ -47,21 +47,22 @@ public class GPSHandler : MonoBehaviour
             }
             else
             {
-                goodFixTimer = Config.TimeToGoodGPSFix;
+                _goodFixTimer = Config.TimeToGoodGpsFix;
                 locationData.GoodFix = false;
             }
 
             GameData.CurrentGpsPosition = locationData;
         }
-//Debug GPS stuff here ...
+
+        //Debug GPS stuff here ...
         else
         {
             //GameData.CurrentGpsPosition.Latitude += 0.0002f * Time.deltaTime;
             //GameData.CurrentGpsPosition.Longitude += 0.0002f * Time.deltaTime;
 
-            if (goodFixTimer > 0)
+            if (_goodFixTimer > 0)
             {
-                goodFixTimer -= Time.deltaTime;
+                _goodFixTimer -= Time.deltaTime;
             }
             else
             {
@@ -69,12 +70,12 @@ public class GPSHandler : MonoBehaviour
             }
         }
 
-        Vector2 _tilePos = Helper.WorldToTilePos(GameData.CurrentGpsPosition.Latitude, GameData.CurrentGpsPosition.Longitude, GameData.CurrentZoom);
+        Vector2 tilePos = Helper.WorldToTilePos(GameData.CurrentGpsPosition.Latitude, GameData.CurrentGpsPosition.Longitude, GameData.CurrentZoom);
 
-        GameData.CurrentGpsPosition.OSMTileX = Mathf.FloorToInt(_tilePos.x);
-        GameData.CurrentGpsPosition.OSMTileY = Mathf.FloorToInt(_tilePos.y);
+        GameData.CurrentGpsPosition.OsmTileX = Mathf.FloorToInt(tilePos.x);
+        GameData.CurrentGpsPosition.OsmTileY = Mathf.FloorToInt(tilePos.y);
 
-        GameData.CurrentGpsPosition.OSMOnTilePosX = _tilePos.x - GameData.CurrentGpsPosition.OSMTileX;
-        GameData.CurrentGpsPosition.OSMOnTilePosY = _tilePos.y - GameData.CurrentGpsPosition.OSMTileY;
+        GameData.CurrentGpsPosition.OsmOnTilePosX = tilePos.x - GameData.CurrentGpsPosition.OsmTileX;
+        GameData.CurrentGpsPosition.OsmOnTilePosY = tilePos.y - GameData.CurrentGpsPosition.OsmTileY;
     }
 }

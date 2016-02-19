@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Helper {
-
+public static class Helper
+{
     public static Vector2 WorldToTilePos(float lat, float lon, int zoom)
     {
         Vector2 p = new Vector2
@@ -15,9 +15,8 @@ public static class Helper {
         return p;
     }
 
-    private static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+    public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
     {
-        // Unix timestamp is seconds past epoch
         DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
         return dtDateTime;
@@ -33,25 +32,25 @@ public static class Helper {
         public float VerticalAccuracy { get; set; }
         public string Status { get; set; }
         public bool GoodFix { get; set; }
-        public int OSMTileX { get; set; }
-        public int OSMTileY { get; set; }
-        public float OSMOnTilePosX { get; set; }
-        public float OSMOnTilePosY { get; set; }
-
+        public int OsmTileX { get; set; }
+        public int OsmTileY { get; set; }
+        public float OsmOnTilePosX { get; set; }
+        public float OsmOnTilePosY { get; set; }
     }
 
     public struct TowerData
     {
-        public string name;
+        //This is just a dummy imp
+        public string Name;
         public float Latitude;
         public float Longitude;
     }
 
-    public class ThreeDimensionalDictionary<K1, K2, K3, V>
+    public class ThreeDimensionalDictionary<TK1, TK2, TK3, TV>
     {
-        private Dictionary<K1, Dictionary<K2, Dictionary<K3, V>>> _dict = new Dictionary<K1, Dictionary<K2, Dictionary<K3, V>>>();
+        private readonly Dictionary<TK1, Dictionary<TK2, Dictionary<TK3, TV>>> _dict = new Dictionary<TK1, Dictionary<TK2, Dictionary<TK3, TV>>>();
 
-        public bool Check(K1 k1, K2 k2, K3 k3)
+        public bool Check(TK1 k1, TK2 k2, TK3 k3)
         {
             try
             {
@@ -65,47 +64,38 @@ public static class Helper {
             return false;
         }
 
-        public V Get(K1 k1, K2 k2, K3 k3)
+        public TV Get(TK1 k1, TK2 k2, TK3 k3)
         {
             if (Check(k1, k2, k3))
                 return _dict[k1][k2][k3];
 
-            return default(V);
+            return default(TV);
         }
 
-        public void Add(K1 k1, K2 k2, K3 k3, V v)
+        public void Add(TK1 k1, TK2 k2, TK3 k3, TV v)
         {
             if (_dict.ContainsKey(k1))
             {
-                var k1d = _dict[k1];
+                var k1D = _dict[k1];
 
-                if (k1d.ContainsKey(k2))
+                if (k1D.ContainsKey(k2))
                 {
-                    var k1k2d = k1d[k2];
+                    var k1K2D = k1D[k2];
 
-                    if (!k1k2d.ContainsKey(k3))
+                    if (!k1K2D.ContainsKey(k3))
                     {
-                        k1k2d.Add(k3, v);
+                        k1K2D.Add(k3, v);
                     }
                 }
                 else
                 {
-                    var k3v = new Dictionary<K3, V>();
-                    k3v.Add(k3, v);
-
-                    k1d.Add(k2, k3v);
+                    k1D.Add(k2, new Dictionary<TK3, TV> { { k3, v } });
                 }
 
             }
             else
             {
-                var k3v = new Dictionary<K3, V>();
-                k3v.Add(k3, v);
-
-                var k2k3v = new Dictionary<K2, Dictionary<K3, V>>();
-                k2k3v.Add(k2, k3v);
-
-                _dict.Add(k1, k2k3v);
+                _dict.Add(k1, new Dictionary<TK2, Dictionary<TK3, TV>> { { k2, new Dictionary<TK3, TV> { { k3, v } } } });
             }
         }
     }

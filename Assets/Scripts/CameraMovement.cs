@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class CameraMovement : MonoBehaviour
 {
     private Vector3 _cameraOffset;
 
-    // Use this for initialization
     void Start()
     {
-        _cameraOffset = new Vector3(0,0,-5);
+        _cameraOffset = new Vector3(0, 0, -5);
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -26,7 +23,7 @@ public class CameraMovement : MonoBehaviour
         }
 #endif
 
-        this.transform.localPosition = _cameraOffset;
+        transform.localPosition = _cameraOffset;
     }
 }
 

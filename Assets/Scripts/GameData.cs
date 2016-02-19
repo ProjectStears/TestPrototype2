@@ -8,7 +8,6 @@ public static class GameData
 
     public static MySqlConnection DbConnection;
 
-
     static GameData()
     {
         DbConnection = new MySqlConnection("server=127.0.0.1;uid=root;pwd=;database=stears;");

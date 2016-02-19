@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class DebugUI : MonoBehaviour {
-
+public class DebugUI : MonoBehaviour
+{
     public GameObject GoStatus;
     public GameObject GoLat;
     public GameObject GoLon;
@@ -33,7 +33,8 @@ public class DebugUI : MonoBehaviour {
     private Text _textTouch2;
     private Text _textTouchAngle;
 
-    void Start () {
+    void Start()
+    {
         _textStatus = GoStatus.GetComponent<Text>();
         _textLat = GoLat.GetComponent<Text>();
         _textLon = GoLon.GetComponent<Text>();
@@ -49,20 +50,20 @@ public class DebugUI : MonoBehaviour {
         _textTouch2 = GoTouch2.GetComponent<Text>();
         _textTouchAngle = GoTouchAngle.GetComponent<Text>();
     }
-	
-	void Update ()
-	{
-	    _textStatus.text = GameData.CurrentGpsPosition.Status;
-	    _textLat.text = GameData.CurrentGpsPosition.Latitude.ToString();
-	    _textLon.text = GameData.CurrentGpsPosition.Longitude.ToString();
-	    _textAlt.text = GameData.CurrentGpsPosition.Altitude.ToString();
-	    _textHacc.text = GameData.CurrentGpsPosition.HorizontalAccuracy.ToString();
-	    _textVacc.text = GameData.CurrentGpsPosition.VerticalAccuracy.ToString();
-	    _textTime.text = GameData.CurrentGpsPosition.Timestamp.ToString();
-	    _textZoom.text = GameData.CurrentZoom.ToString();
-	    _textFix.text = GameData.CurrentGpsPosition.GoodFix.ToString();
 
-	    _textTilex.text = GameData.CurrentGpsPosition.OSMTileX.ToString();
-	    _textTiley.text = GameData.CurrentGpsPosition.OSMTileY.ToString();
-	}
+    void Update()
+    {
+        _textStatus.text = GameData.CurrentGpsPosition.Status;
+        _textLat.text = GameData.CurrentGpsPosition.Latitude.ToString();
+        _textLon.text = GameData.CurrentGpsPosition.Longitude.ToString();
+        _textAlt.text = GameData.CurrentGpsPosition.Altitude.ToString();
+        _textHacc.text = GameData.CurrentGpsPosition.HorizontalAccuracy.ToString();
+        _textVacc.text = GameData.CurrentGpsPosition.VerticalAccuracy.ToString();
+        _textTime.text = GameData.CurrentGpsPosition.Timestamp.ToString();
+        _textZoom.text = GameData.CurrentZoom.ToString();
+        _textFix.text = GameData.CurrentGpsPosition.GoodFix.ToString();
+
+        _textTilex.text = GameData.CurrentGpsPosition.OsmTileX.ToString();
+        _textTiley.text = GameData.CurrentGpsPosition.OsmTileY.ToString();
+    }
 }

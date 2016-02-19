@@ -1,32 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
-public class MapTileLoader : MonoBehaviour {
-
-    public string url;
-    private Vector2 pos;
-    private bool startLoading;
-    private float timeoutTimer;
+public class MapTileLoader : MonoBehaviour
+{
+    private Vector2 _pos;
+    private bool _startLoading;
+    private float _timeoutTimer;
 
     public Vector2 Pos
     {
         set
         {
-            startLoading = true;
-            pos = value;
+            _startLoading = true;
+            _pos = value;
         }
     }
 
     IEnumerator Start()
     {
-        timeoutTimer = Config.MapTileStartLoadingTimeout;
+        _timeoutTimer = Config.MapTileStartLoadingTimeout;
 
-        while (!startLoading)
+        while (!_startLoading)
         {
-            timeoutTimer -= 0.2f;
+            _timeoutTimer -= 0.2f;
 
-            if (timeoutTimer < 0)
+            if (_timeoutTimer < 0)
             {
                 break;
             }
@@ -34,7 +32,7 @@ public class MapTileLoader : MonoBehaviour {
             yield return new WaitForSeconds(0.2f);
         }
 
-        if (startLoading)
+        if (_startLoading)
         {
             StartCoroutine(LoadTile());
         }
@@ -42,15 +40,13 @@ public class MapTileLoader : MonoBehaviour {
 
     IEnumerator LoadTile()
     {
-        url = "http://a.tile.openstreetmap.org/" + GameData.CurrentZoom + "/" + Mathf.FloorToInt(pos.x) + "/" + Mathf.FloorToInt(pos.y) + ".png";
-//        GameObject.Find("url").GetComponent<Text>().text = url;
+        var url = Config.MapLoaderBaseUrl + GameData.CurrentZoom + "/" + Mathf.FloorToInt(_pos.x) + "/" + Mathf.FloorToInt(_pos.y) + ".png";
         WWW www = new WWW(url);
         yield return www;
-        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
 
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         var tex = www.texture;
         tex.filterMode = Config.MapFilterMode;
-
-        renderer.sprite = Sprite.Create(tex, new Rect(0,0,256,256), new Vector2(0,0), 256);
+        renderer.sprite = Sprite.Create(tex, new Rect(0, 0, 256, 256), new Vector2(0, 0), 256);
     }
 }
