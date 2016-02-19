@@ -75,13 +75,38 @@ public static class Helper {
 
         public void Add(K1 k1, K2 k2, K3 k3, V v)
         {
-            var k3v = new Dictionary<K3, V>();
-            k3v.Add(k3, v);
+            if (_dict.ContainsKey(k1))
+            {
+                var k1d = _dict[k1];
 
-            var k2k3v = new Dictionary<K2, Dictionary<K3, V>>();
-            k2k3v.Add(k2, k3v);
+                if (k1d.ContainsKey(k2))
+                {
+                    var k1k2d = k1d[k2];
 
-            _dict.Add(k1, k2k3v);
+                    if (!k1k2d.ContainsKey(k3))
+                    {
+                        k1k2d.Add(k3, v);
+                    }
+                }
+                else
+                {
+                    var k3v = new Dictionary<K3, V>();
+                    k3v.Add(k3, v);
+
+                    k1d.Add(k2, k3v);
+                }
+
+            }
+            else
+            {
+                var k3v = new Dictionary<K3, V>();
+                k3v.Add(k3, v);
+
+                var k2k3v = new Dictionary<K2, Dictionary<K3, V>>();
+                k2k3v.Add(k2, k3v);
+
+                _dict.Add(k1, k2k3v);
+            }
         }
     }
 }
