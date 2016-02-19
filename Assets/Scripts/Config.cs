@@ -8,6 +8,10 @@ public static class Config
     public static float TimeToGoodGPSFix;
     public static Vector2 MaxCameraOffset;
 
+    public static float MapServiceRunAtMostEvery = 5f;
+    public static int MapLoadSourroundingTiles = 5;
+    public static float MapTileStartLoadingTimeout = 5;
+
     public static bool UseDebugGpsPosition;
     public static Helper.LocationData DebugGpsPosition;
 

@@ -1006,9 +1006,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e437c9f120cf0864d8b9d11de76f2f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 126092, guid: 9df9f0ebf199bc14e99bcff3726eae83, type: 2}
-  mapTilePrefab: {fileID: 184878, guid: 58c84024005c9cb4dbcdca418984c595, type: 2}
-  justone: 1
+  TowerPrefab: {fileID: 126092, guid: 9df9f0ebf199bc14e99bcff3726eae83, type: 2}
+  MapTilePrefab: {fileID: 184878, guid: 58c84024005c9cb4dbcdca418984c595, type: 2}
+  timer: 0
 --- !u!1 &1271630072
 GameObject:
   m_ObjectHideFlags: 0
