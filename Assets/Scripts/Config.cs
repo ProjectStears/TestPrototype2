@@ -13,6 +13,8 @@ public static class Config
     public static FilterMode MapFilterMode = FilterMode.Bilinear;
     public static string MapLoaderBaseUrl = "http://a.tile.openstreetmap.org/";
 
+    public static float PinchZoomSensitivity = 0.2f;
+
     public static bool UseDebugGpsPosition;
     public static Helper.LocationData DebugGpsPosition;
 

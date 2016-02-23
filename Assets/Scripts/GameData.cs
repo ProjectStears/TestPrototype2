@@ -8,6 +8,9 @@ public static class GameData
 
     public static MySqlConnection DbConnection;
 
+
+    public static float DebugTouchDist;
+
     static GameData()
     {
         CurrentGpsPosition = new Helper.LocationData();
