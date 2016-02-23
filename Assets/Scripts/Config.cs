@@ -5,7 +5,7 @@ public static class Config
 {
     public static float MinGpsAcc = 40;
     public static float TimeToGoodGpsFix;
-    public static Vector2 MaxCameraOffset;
+    public static Vector3 MaxCameraOffset;
 
     public static float MapServiceRunAtMostEvery = 5f;
     public static int MapLoadSourroundingTiles = 2;
@@ -36,7 +36,7 @@ public static class Config
             new Helper.TowerData() {Name = "Kirche", Latitude = 48.05060f, Longitude = 8.20918f}
         };
 
-        MaxCameraOffset = new Vector2(1f, 1f);
+        MaxCameraOffset = new Vector3(1f, 1f, 0.5f);
 #if UNITY_EDITOR
         UseDebugGpsPosition = true;
         TimeToGoodGpsFix = 1;
