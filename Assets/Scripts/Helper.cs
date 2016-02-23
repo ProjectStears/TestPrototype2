@@ -22,7 +22,7 @@ public static class Helper
         return dtDateTime;
     }
 
-    public struct LocationData
+    public class LocationData
     {
         public double Timestamp { get; set; }
         public float Latitude { get; set; }
@@ -31,11 +31,73 @@ public static class Helper
         public float HorizontalAccuracy { get; set; }
         public float VerticalAccuracy { get; set; }
         public string Status { get; set; }
-        public bool GoodFix { get; set; }
-        public int OsmTileX { get; set; }
-        public int OsmTileY { get; set; }
+
+        private int _osmTileX;
+        public int OsmTileX
+        {
+            get { return _osmTileX; }
+            set
+            {
+                _osmTileX = value;
+                if (!_firstfix)
+                {
+                    OsmWorldPosX = _osmTileX - _osmTileOffsetX;
+                }
+            }
+        }
+
+        private int _osmTileY;
+        public int OsmTileY
+        {
+            get { return _osmTileY; }
+            set
+            {
+                _osmTileY = value;
+                if (!_firstfix)
+                {
+                    OsmWorldPosY = _osmTileY - _osmTileOffsetY;
+                }
+            }
+        }
+
+        public int OsmWorldPosX { get; private set; }
+        public int OsmWorldPosY { get; private set; }
         public float OsmOnTilePosX { get; set; }
         public float OsmOnTilePosY { get; set; }
+
+        private int _osmTileOffsetX;
+        public int OsmTileOffsetX
+        {
+            get { return _osmTileOffsetX; }
+        }
+
+        private int _osmTileOffsetY;
+        public int OsmTileOffsetY
+        {
+            get { return _osmTileOffsetY; }
+        }
+
+        private bool _firstfix;
+        private bool _goodFix;
+        public bool GoodFix
+        {
+            get { return _goodFix; }
+            set
+            {
+                _goodFix = value;
+                if (_firstfix)
+                {
+                    _osmTileOffsetX = _osmTileX;
+                    _osmTileOffsetY = _osmTileY;
+                    _firstfix = false;
+                }
+            }
+        }
+        public LocationData()
+        {
+            _firstfix = true;
+            _goodFix = false;
+        }
     }
 
     public struct TowerData

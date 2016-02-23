@@ -20,6 +20,7 @@ public static class Config
 
     static Config()
     {
+        DebugGpsPosition = new Helper.LocationData();
         DebugGpsPosition.Latitude = 48.05080f;
         DebugGpsPosition.Longitude = 8.20934f;
         DebugGpsPosition.Altitude = 800;

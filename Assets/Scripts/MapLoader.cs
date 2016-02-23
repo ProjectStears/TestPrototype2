@@ -36,20 +36,22 @@ public class MapLoader : MonoBehaviour
         {
             for (int x = -Config.MapLoadSourroundingTiles; x <= Config.MapLoadSourroundingTiles; x++)
             {
-                int posx = x + GameData.CurrentGpsPosition.OsmTileX;
-                int posy = y + GameData.CurrentGpsPosition.OsmTileY;
+                int worldPosX = x + GameData.CurrentGpsPosition.OsmWorldPosX;
+                int worldPosY = y + GameData.CurrentGpsPosition.OsmWorldPosY;
+                int tilePosX = x + GameData.CurrentGpsPosition.OsmTileX;
+                int tilePosY = y + GameData.CurrentGpsPosition.OsmTileY;
 
-                if (!_mapTileD.Check(GameData.CurrentZoom, posx, posy))
+                if (!_mapTileD.Check(GameData.CurrentZoom, tilePosX, tilePosY))
                 {
                     var go = Instantiate(MapTilePrefab);
 
-                    _mapTileD.Add(GameData.CurrentZoom, posx, posy, go);
+                    _mapTileD.Add(GameData.CurrentZoom, tilePosX, tilePosY, go);
 
-                    go.name = GameData.CurrentZoom + "x" + posx + "x" + posy;
+                    go.name = GameData.CurrentZoom + "x" + tilePosX + "x" + tilePosX;
                     go.transform.parent = transform;
-                    go.transform.position = new Vector2(posx, -posy);
+                    go.transform.position = new Vector2(worldPosX, -worldPosY);
 
-                    go.GetComponent<MapTileLoader>().Pos = new Vector2(posx, posy);
+                    go.GetComponent<MapTileLoader>().Pos = new Vector2(tilePosX, tilePosY);
                 }
             }
         }
