@@ -10,6 +10,7 @@ public static class GameData
 
     static GameData()
     {
+        CurrentGpsPosition = new Helper.LocationData();
         DbConnection = new MySqlConnection("server=127.0.0.1;uid=root;pwd=;database=stears;");
         try
         {

@@ -23,35 +23,31 @@ public class GPSHandler : MonoBehaviour
     {
         if (!Config.UseDebugGpsPosition)
         {
-            Helper.LocationData locationData = new Helper.LocationData();
+            GameData.CurrentGpsPosition.Latitude = Input.location.lastData.latitude;
+            GameData.CurrentGpsPosition.Longitude = Input.location.lastData.longitude;
+            GameData.CurrentGpsPosition.Altitude = Input.location.lastData.altitude;
+            GameData.CurrentGpsPosition.HorizontalAccuracy = Input.location.lastData.horizontalAccuracy;
+            GameData.CurrentGpsPosition.VerticalAccuracy = Input.location.lastData.verticalAccuracy;
+            GameData.CurrentGpsPosition.Timestamp = Input.location.lastData.timestamp;
+            GameData.CurrentGpsPosition.Status = Input.location.status.ToString();
 
-            locationData.Latitude = Input.location.lastData.latitude;
-            locationData.Longitude = Input.location.lastData.longitude;
-            locationData.Altitude = Input.location.lastData.altitude;
-            locationData.HorizontalAccuracy = Input.location.lastData.horizontalAccuracy;
-            locationData.VerticalAccuracy = Input.location.lastData.verticalAccuracy;
-            locationData.Timestamp = Input.location.lastData.timestamp;
-            locationData.Status = Input.location.status.ToString();
-
-            if (locationData.HorizontalAccuracy < Config.MinGpsAcc && locationData.VerticalAccuracy < Config.MinGpsAcc)
+            if (GameData.CurrentGpsPosition.HorizontalAccuracy < Config.MinGpsAcc && GameData.CurrentGpsPosition.VerticalAccuracy < Config.MinGpsAcc)
             {
                 if (_goodFixTimer > 0)
                 {
                     _goodFixTimer -= Time.deltaTime;
-                    locationData.GoodFix = false;
+                    GameData.CurrentGpsPosition.GoodFix = false;
                 }
                 else
                 {
-                    locationData.GoodFix = true;
+                    GameData.CurrentGpsPosition.GoodFix = true;
                 }
             }
             else
             {
                 _goodFixTimer = Config.TimeToGoodGpsFix;
-                locationData.GoodFix = false;
+                GameData.CurrentGpsPosition.GoodFix = false;
             }
-
-            GameData.CurrentGpsPosition = locationData;
         }
 
         //Debug GPS stuff here ...

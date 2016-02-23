@@ -39,10 +39,7 @@ public static class Helper
             set
             {
                 _osmTileX = value;
-                if (!_firstfix)
-                {
-                    OsmWorldPosX = _osmTileX - _osmTileOffsetX;
-                }
+                OsmWorldPosX = _osmTileX - _osmTileOffsetX;
             }
         }
 
@@ -53,10 +50,7 @@ public static class Helper
             set
             {
                 _osmTileY = value;
-                if (!_firstfix)
-                {
-                    OsmWorldPosY = _osmTileY - _osmTileOffsetY;
-                }
+                OsmWorldPosY = _osmTileY - _osmTileOffsetY;
             }
         }
 
@@ -85,7 +79,7 @@ public static class Helper
             set
             {
                 _goodFix = value;
-                if (_firstfix)
+                if (_firstfix && value)
                 {
                     _osmTileOffsetX = _osmTileX;
                     _osmTileOffsetY = _osmTileY;
