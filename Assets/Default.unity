@@ -502,7 +502,7 @@ GameObject:
   - 222: {fileID: 417452679}
   - 114: {fileID: 417452678}
   m_Layer: 5
-  m_Name: touchDist
+  m_Name: DebugString
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -559,7 +559,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: touchDist
+  m_Text: DebugString
 --- !u!222 &417452679
 CanvasRenderer:
   m_ObjectHideFlags: 0

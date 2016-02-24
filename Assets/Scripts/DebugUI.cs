@@ -14,9 +14,7 @@ public class DebugUI : MonoBehaviour
     public GameObject GoTilex;
     public GameObject GoTiley;
     public GameObject GoFix;
-    public GameObject GoTouchDist;
-    public GameObject GoTouch2;
-    public GameObject GoTouchAngle;
+    public GameObject GoDebugString;
 
     private Text _textStatus;
     private Text _textLat;
@@ -29,7 +27,7 @@ public class DebugUI : MonoBehaviour
     private Text _textTilex;
     private Text _textTiley;
     private Text _textFix;
-    private Text _textTouchDist;
+    private Text _textDebugString;
 
     void Start()
     {
@@ -44,7 +42,7 @@ public class DebugUI : MonoBehaviour
         _textTilex = GoTilex.GetComponent<Text>();
         _textTiley = GoTiley.GetComponent<Text>();
         _textFix = GoFix.GetComponent<Text>();
-        _textTouchDist = GoTouchDist.GetComponent<Text>();
+        _textDebugString = GoDebugString.GetComponent<Text>();
     }
 
     void Update()
@@ -62,6 +60,6 @@ public class DebugUI : MonoBehaviour
         _textTilex.text = GameData.CurrentGpsPosition.OsmTileX.ToString() + "x" + GameData.CurrentGpsPosition.OsmTileY.ToString();
         _textTiley.text = GameData.CurrentGpsPosition.OsmTileOffsetX.ToString() + "x" + GameData.CurrentGpsPosition.OsmTileOffsetY.ToString();
 
-        _textTouchDist.text = GameData.DebugTouchDist.ToString();
+        _textDebugString.text = GameData.DebugString;
     }
 }

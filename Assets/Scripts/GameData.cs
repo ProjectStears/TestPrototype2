@@ -8,8 +8,7 @@ public static class GameData
 
     public static MySqlConnection DbConnection;
 
-
-    public static float DebugTouchDist;
+    public static string DebugString;
 
     static GameData()
     {
