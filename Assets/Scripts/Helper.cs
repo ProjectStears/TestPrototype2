@@ -102,6 +102,23 @@ public static class Helper
         public float Longitude;
     }
 
+    //http://wiki.unity3d.com/index.php/DetectTouchMovement
+    static public float CalcTouchAngle(Vector2 pos1, Vector2 pos2)
+    {
+        Vector2 from = pos2 - pos1;
+        Vector2 to = new Vector2(1, 0);
+
+        float result = Vector2.Angle(from, to);
+        Vector3 cross = Vector3.Cross(from, to);
+
+        if (cross.z > 0)
+        {
+            result = 360f - result;
+        }
+
+        return result;
+    }
+
     public class ThreeDimensionalDictionary<TK1, TK2, TK3, TV>
     {
         private readonly Dictionary<TK1, Dictionary<TK2, Dictionary<TK3, TV>>> _dict = new Dictionary<TK1, Dictionary<TK2, Dictionary<TK3, TV>>>();

@@ -39,7 +39,7 @@ public class CameraMovement : MonoBehaviour
 
         if (Input.touchCount == 2)
         {
-            var newAngle = Vector2.Angle(Input.GetTouch(0).position, Input.GetTouch(1).position);
+            var newAngle = Helper.CalcTouchAngle(Input.GetTouch(0).position, Input.GetTouch(1).position);
 
             if (_cameraAngle != 0)
             {
@@ -48,10 +48,10 @@ public class CameraMovement : MonoBehaviour
             _cameraAngle = newAngle;
 
             var newDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
-            GameData.DebugTouchDist = newDistance;
+
             if (_cameraDistance != 0)
             {
-                _currentCameraOffset.z += (_cameraDistance - newDistance)*Time.deltaTime*Config.PinchZoomSensitivity;
+                _currentCameraOffset.z -= (_cameraDistance - newDistance)*Time.deltaTime*Config.PinchZoomSensitivity;
             }
             _cameraDistance = newDistance;
         }
