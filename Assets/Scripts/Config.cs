@@ -18,7 +18,7 @@ public static class Config
     public static bool UseDebugGpsPosition;
     public static Helper.LocationData DebugGpsPosition;
 
-    public static List<Helper.TowerData> Towers;
+    public static List<Helper.TowerData> Towers { get; private set; }
 
     static Config()
     {
