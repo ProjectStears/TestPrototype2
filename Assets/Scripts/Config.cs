@@ -8,9 +8,9 @@ public static class Config
     public static Vector3 MaxCameraOffset;
 
     public static float MapServiceRunAtMostEvery = 5f;
-    public static int MapLoadSourroundingTiles = 2;
+    public static int MapLoadSourroundingTiles = 3;
     public static float MapTileStartLoadingTimeout = 5;
-    public static FilterMode MapFilterMode = FilterMode.Bilinear;
+    public static FilterMode MapFilterMode = FilterMode.Point;
     public static string MapLoaderBaseUrl = "http://a.tile.openstreetmap.org/";
 
     public static float PinchZoomSensitivity = 0.1f;
