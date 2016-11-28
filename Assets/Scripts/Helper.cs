@@ -97,6 +97,7 @@ public static class Helper
     public struct TowerData
     {
         //This is just a dummy imp
+        public long Id;
         public string Name;
         public float Latitude;
         public float Longitude;

@@ -60,6 +60,11 @@ public class CameraMovement : MonoBehaviour
             _cameraAngle = 0;
             _cameraDistance = 0;
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 #endif
 
         _currentCameraOffset.x = Mathf.Clamp(_currentCameraOffset.x, _lowerCameraOffsetClamp.x, _upperCameraOffsetClamp.x);
