@@ -73,5 +73,15 @@ public class GPSHandler : MonoBehaviour
 
         GameData.CurrentGpsPosition.OsmOnTilePosX = tilePos.x - GameData.CurrentGpsPosition.OsmTileX;
         GameData.CurrentGpsPosition.OsmOnTilePosY = tilePos.y - GameData.CurrentGpsPosition.OsmTileY;
+
+        if (GameData.CurrentGpsPosition.GoodFix)
+        {
+            if (!Config.MapCenterOffsetSet)
+            {
+                Config.MapCenterTileOffsetX = GameData.CurrentGpsPosition.OsmTileX;
+                Config.MapCenterTileOffsetY = GameData.CurrentGpsPosition.OsmTileY;
+                Config.MapCenterOffsetSet = true;
+            }
+        }
     }
 }

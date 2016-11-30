@@ -108,10 +108,12 @@ public class MapLoader : MonoBehaviour
         {
             var go = Instantiate(TowerPrefab);
             go.transform.parent = transform;
-            go.transform.name = "Tower-" + tower.Id;
+            go.transform.name = "Tower-" + tower.Id + "-" + tower.Name;
 
             //Todo: How do I get the right position again?
-            go.transform.position = Helper.WorldToTilePos(tower.Latitude, tower.Longitude, 16);
+            Vector3 towerpos = Helper.WorldToTilePos(tower.Latitude, tower.Longitude, 16) - new Vector2(Config.MapCenterTileOffsetX, Config.MapCenterTileOffsetY);
+            towerpos.y = 1 - towerpos.y;
+            go.transform.position = towerpos;
 
         }
 

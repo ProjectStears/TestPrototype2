@@ -18,6 +18,10 @@ public static class Config
     public static bool UseDebugGpsPosition;
     public static Helper.LocationData DebugGpsPosition;
 
+    public static bool MapCenterOffsetSet;
+    public static int MapCenterTileOffsetX;
+    public static int MapCenterTileOffsetY;
+
     static Config()
     {
         DebugGpsPosition = new Helper.LocationData();
@@ -29,6 +33,7 @@ public static class Config
         DebugGpsPosition.Timestamp = 5;
         DebugGpsPosition.Status = "Debugging";
 
+        MapCenterOffsetSet = false;
         MaxCameraOffset = new Vector3(1f, 1f, 0.5f);
 #if UNITY_EDITOR
         UseDebugGpsPosition = true;
