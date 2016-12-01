@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class DebugUI : MonoBehaviour
 {
+    private GameController GC;
+
     public GameObject GoPanel;
     public GameObject GoDebugText;
 
@@ -12,6 +14,15 @@ public class DebugUI : MonoBehaviour
 
     void Start()
     {
+        try
+        {
+            GC = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+
 #if DEBUG 
         _textDebug = GoDebugText.GetComponent<Text>();
 #else
@@ -27,19 +38,19 @@ public class DebugUI : MonoBehaviour
 
     void LateUpdate()
     {
-        if (GameData.DebugInfo.Count > 0)
+        if (GC.DebugInfo.Count > 0)
         {
             GoPanel.SetActive(true);
             string fullText = default (string);
 
-            foreach (KeyValuePair<string, string> keyValuePair in GameData.DebugInfo)
+            foreach (KeyValuePair<string, string> keyValuePair in GC.DebugInfo)
             {
                 fullText += keyValuePair.Key + ": " + keyValuePair.Value + "\n";
             }
 
             _textDebug.text = fullText;
 
-            GameData.DebugInfo.Clear();
+            GC.DebugInfo.Clear();
         }
         else
         {

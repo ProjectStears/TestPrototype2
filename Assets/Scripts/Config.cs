@@ -22,6 +22,8 @@ public static class Config
     public static int MapCenterTileOffsetX;
     public static int MapCenterTileOffsetY;
 
+    public static float TowerStackOffset;
+
     static Config()
     {
         DebugGpsPosition = new Helper.LocationData();
@@ -35,6 +37,8 @@ public static class Config
 
         MapCenterOffsetSet = false;
         MaxCameraOffset = new Vector3(1f, 1f, 0.5f);
+
+        TowerStackOffset = -0.04f;
 #if UNITY_EDITOR
         UseDebugGpsPosition = true;
         TimeToGoodGpsFix = 1;
