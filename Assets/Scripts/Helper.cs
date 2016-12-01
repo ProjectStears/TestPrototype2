@@ -94,15 +94,6 @@ public static class Helper
         }
     }
 
-    public struct TowerData
-    {
-        //This is just a dummy imp
-        public long Id;
-        public string Name;
-        public float Latitude;
-        public float Longitude;
-    }
-
     //http://wiki.unity3d.com/index.php/DetectTouchMovement
     static public float CalcTouchAngle(Vector2 pos1, Vector2 pos2)
     {
@@ -172,5 +163,12 @@ public static class Helper
                 _dict.Add(k1, new Dictionary<TK2, Dictionary<TK3, TV>> { { k2, new Dictionary<TK3, TV> { { k3, v } } } });
             }
         }
+    }
+
+    [Serializable]
+    public struct PrefabRef
+    {
+        public string name;
+        public GameObject prefab;
     }
 }

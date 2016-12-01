@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public class MapTileLoader : MonoBehaviour
 {
+    private GameController GC;
+
     private Vector2 _pos;
     private bool _startLoading;
     private float _timeoutTimer;
@@ -18,6 +21,8 @@ public class MapTileLoader : MonoBehaviour
 
     IEnumerator Start()
     {
+        GC = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
         _timeoutTimer = Config.MapTileStartLoadingTimeout;
 
         while (!_startLoading)
@@ -40,7 +45,7 @@ public class MapTileLoader : MonoBehaviour
 
     IEnumerator LoadTile()
     {
-        var url = Config.MapLoaderBaseUrl + GameData.CurrentZoom + "/" + Mathf.FloorToInt(_pos.x) + "/" + Mathf.FloorToInt(_pos.y) + ".png";
+        var url = Config.MapLoaderBaseUrl + GC.CurrentZoom + "/" + Mathf.FloorToInt(_pos.x) + "/" + Mathf.FloorToInt(_pos.y) + ".png";
         WWW www = new WWW(url);
         yield return www;
 

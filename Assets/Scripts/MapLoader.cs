@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
 public class MapLoader : MonoBehaviour
 {
+    private GameController GC;
+
     public GameObject TowerPrefab;
     public GameObject MapTilePrefab;
 
@@ -12,21 +15,23 @@ public class MapLoader : MonoBehaviour
     private float _tileServiceTimer;
     private bool _tileServiceRunning;
 
-    private List<Helper.TowerData> _towers;
+    private List<TowerData> _towers;
     private float _towerServiceTimer;
     private bool _towerServiceRunning;
 
     void Start()
     {
+        GC = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
         _tileServiceRunning = false;
         _mapTileD = new Helper.ThreeDimensionalDictionary<int, int, int, GameObject>();
-        _towers = new List<Helper.TowerData>();
+        _towers = new List<TowerData>();
     }
 
     void Update()
     {
         //Todo: Combine calling code for Tile- and Tower-Service
-        if (_tileServiceTimer <= 0 && !_tileServiceRunning && GameData.CurrentGpsPosition.GoodFix)
+        if (_tileServiceTimer <= 0 && !_tileServiceRunning && GC.CurrentGpsPosition.GoodFix)
         {
             _tileServiceTimer = Config.MapServiceRunAtMostEvery;
             _tileServiceRunning = true;
@@ -37,7 +42,7 @@ public class MapLoader : MonoBehaviour
             _tileServiceTimer -= Time.deltaTime;
         }
 
-        if (_towerServiceTimer <= 0 && !_towerServiceRunning && GameData.CurrentGpsPosition.GoodFix)
+        if (_towerServiceTimer <= 0 && !_towerServiceRunning && GC.CurrentGpsPosition.GoodFix)
         {
             _towerServiceTimer = Config.MapServiceRunAtMostEvery;
             _towerServiceRunning = true;
@@ -55,18 +60,18 @@ public class MapLoader : MonoBehaviour
         {
             for (int x = -Config.MapLoadSourroundingTiles; x <= Config.MapLoadSourroundingTiles; x++)
             {
-                int worldPosX = x + GameData.CurrentGpsPosition.OsmWorldPosX;
-                int worldPosY = y + GameData.CurrentGpsPosition.OsmWorldPosY;
-                int tilePosX = x + GameData.CurrentGpsPosition.OsmTileX;
-                int tilePosY = y + GameData.CurrentGpsPosition.OsmTileY;
+                int worldPosX = x + GC.CurrentGpsPosition.OsmWorldPosX;
+                int worldPosY = y + GC.CurrentGpsPosition.OsmWorldPosY;
+                int tilePosX = x + GC.CurrentGpsPosition.OsmTileX;
+                int tilePosY = y + GC.CurrentGpsPosition.OsmTileY;
 
-                if (!_mapTileD.Check(GameData.CurrentZoom, tilePosX, tilePosY))
+                if (!_mapTileD.Check(GC.CurrentZoom, tilePosX, tilePosY))
                 {
                     var go = Instantiate(MapTilePrefab);
 
-                    _mapTileD.Add(GameData.CurrentZoom, tilePosX, tilePosY, go);
+                    _mapTileD.Add(GC.CurrentZoom, tilePosX, tilePosY, go);
 
-                    go.name = GameData.CurrentZoom + "x" + tilePosX + "x" + tilePosX;
+                    go.name = GC.CurrentZoom + "x" + tilePosX + "x" + tilePosX;
                     go.transform.parent = transform;
                     go.transform.position = new Vector2(worldPosX, -worldPosY);
 
@@ -82,8 +87,8 @@ public class MapLoader : MonoBehaviour
     IEnumerator MapTowerLoaderService()
     {
         //Well we only have a function for getting them all for now :/
-        var towerstemp = GameData.GetTower_All();
-        var toweradd = new List<Helper.TowerData>();
+        var towerstemp = GC.GetTowers_All();
+        var toweradd = new List<TowerData>();
 
         //Todo: Use HashSet for towers so we can avoid loading of duplicates much easier
         foreach (var towertemp in towerstemp)
@@ -106,11 +111,36 @@ public class MapLoader : MonoBehaviour
 
         foreach (var tower in toweradd)
         {
-            var go = Instantiate(TowerPrefab);
+            var go = new GameObject();
+            int cnt = 1;
+
             go.transform.parent = transform;
             go.transform.name = "Tower-" + tower.Id + "-" + tower.Name;
+            
+            Instantiate(GC.ModulesAvailable[0].prefab).transform.parent = go.transform;
 
-            //Todo: How do I get the right position again?
+            foreach (var module in tower.Modules)
+            {
+                var check = false;
+                foreach (var modulepf in GC.ModulesAvailable)
+                {
+                    if (module.type == modulepf.name)
+                    {
+                        check = true;
+                        var mod = Instantiate(modulepf.prefab);
+                        mod.transform.parent = go.transform;
+                        mod.transform.position = new Vector3(0, 0, cnt * Config.TowerStackOffset);
+                        cnt++;
+                        break;
+                    }
+                }
+
+                if (!check)
+                {
+                    Debug.LogError("Module not found!");
+                }
+            }
+
             Vector3 towerpos = Helper.WorldToTilePos(tower.Latitude, tower.Longitude, 16) - new Vector2(Config.MapCenterTileOffsetX, Config.MapCenterTileOffsetY);
             towerpos.y = 1 - towerpos.y;
             go.transform.position = towerpos;
