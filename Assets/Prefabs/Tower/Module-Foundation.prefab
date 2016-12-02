@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012092678476}
   m_Layer: 0
-  m_Name: Tower-Foundation
+  m_Name: Module-Foundation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

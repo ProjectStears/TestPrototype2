@@ -56,7 +56,7 @@ GameObject:
   - 95: {fileID: 95000013287840990}
   - 114: {fileID: 114000011323437068}
   m_Layer: 0
-  m_Name: Tower-Ice-1
+  m_Name: Module-Ice-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ Transform:
   m_GameObject: {fileID: 1000013252791548}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.075, y: 0.075, z: 0.075}
+  m_LocalScale: {x: 0.065, y: 0.065, z: 0.065}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_Children:
   - {fileID: 4000012516884398}
