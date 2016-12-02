@@ -318,17 +318,17 @@ MonoBehaviour:
   - name: foundation
     prefab: {fileID: 1000012521245570, guid: 27cff210f8d31464ea079afaf6edb13c, type: 2}
   - name: fire-1
-    prefab: {fileID: 1000011294919212, guid: 220a1377a42fbcd45b79c8a592c1a5ff, type: 2}
+    prefab: {fileID: 1000012327707844, guid: 220a1377a42fbcd45b79c8a592c1a5ff, type: 2}
   - name: fire-2
-    prefab: {fileID: 1000010800778742, guid: 7fb5a9a6d06c23a4bbb0b206fb42bcd4, type: 2}
+    prefab: {fileID: 1000011521310402, guid: 7fb5a9a6d06c23a4bbb0b206fb42bcd4, type: 2}
   - name: fire-3
-    prefab: {fileID: 1000010277051406, guid: e1c7565daff406949aec8262a7caa55e, type: 2}
+    prefab: {fileID: 1000014156636318, guid: e1c7565daff406949aec8262a7caa55e, type: 2}
   - name: ice-1
-    prefab: {fileID: 1000013329154086, guid: 27695aa41d9b28d4eb39c23d7b37da92, type: 2}
+    prefab: {fileID: 1000013252791548, guid: 27695aa41d9b28d4eb39c23d7b37da92, type: 2}
   - name: ice-2
-    prefab: {fileID: 1000011893881990, guid: 2c5c5bf2bfdd81b41b40d7bd68440778, type: 2}
+    prefab: {fileID: 1000012215358666, guid: 2c5c5bf2bfdd81b41b40d7bd68440778, type: 2}
   - name: ice-3
-    prefab: {fileID: 1000011492311996, guid: 825998e4d3de84142993e7240cd6cdf5, type: 2}
+    prefab: {fileID: 1000014271341696, guid: 825998e4d3de84142993e7240cd6cdf5, type: 2}
   CurrentZoom: 16
 --- !u!114 &1445877329
 MonoBehaviour:
