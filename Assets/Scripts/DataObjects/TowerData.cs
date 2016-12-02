@@ -8,6 +8,7 @@ public class TowerData {
     public string Name;
     public float Latitude;
     public float Longitude;
+    public float Rotation;
 
     //Note: Module offset Z: -0.04
     public List<ModuleData> Modules;

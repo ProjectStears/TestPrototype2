@@ -114,9 +114,11 @@ public class MapLoader : MonoBehaviour
             var go = new GameObject();
             int cnt = 1;
 
+            tower.GameObjectReference = go;
+
             go.transform.parent = transform;
             go.transform.name = "Tower-" + tower.Id + "-" + tower.Name;
-            
+
             Instantiate(GC.ModulesAvailable[0].prefab).transform.parent = go.transform;
 
             foreach (var module in tower.Modules)
@@ -144,7 +146,7 @@ public class MapLoader : MonoBehaviour
             Vector3 towerpos = Helper.WorldToTilePos(tower.Latitude, tower.Longitude, 16) - new Vector2(Config.MapCenterTileOffsetX, Config.MapCenterTileOffsetY);
             towerpos.y = 1 - towerpos.y;
             go.transform.position = towerpos;
-
+            go.transform.Rotate(new Vector3(0, 0, tower.Rotation));
         }
 
         _towerServiceRunning = false;

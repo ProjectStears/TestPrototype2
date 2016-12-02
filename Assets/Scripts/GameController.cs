@@ -23,23 +23,56 @@ public class GameController : MonoBehaviour
         var t1mods = new List<ModuleData>();
         t1mods.Add(new ModuleData() { type = "fire-1"} );
         t1mods.Add(new ModuleData() { type = "ice-2"} );
-        Towers.Add(new TowerData() { Id = 1, Name = "Aula", Latitude = 48.052015f, Longitude = 8.207707f, Modules = t1mods} );
+        Towers.Add(new TowerData()
+        {
+            Id = 1,
+            Name = "Aula",
+            Latitude = 48.052015f,
+            Longitude = 8.207707f,
+            Rotation = 45,
+            Modules = t1mods
+        });
         var t2mods = new List<ModuleData>();
         t2mods.Add(new ModuleData() { type = "fire-3" });
         t2mods.Add(new ModuleData() { type = "ice-1" });
         t2mods.Add(new ModuleData() { type = "fire-1" });
-        Towers.Add(new TowerData() { Id = 2, Name = "Mensa", Latitude = 48.050725f, Longitude = 8.208396f, Modules = t2mods} );
+        Towers.Add(new TowerData()
+        {
+            Id = 2,
+            Name = "Mensa",
+            Latitude = 48.050725f,
+            Longitude = 8.208396f,
+            Rotation = -38,
+            Modules = t2mods
+        });
         var t3mods = new List<ModuleData>();
         t3mods.Add(new ModuleData() { type = "ice-2" });
         t3mods.Add(new ModuleData() { type = "ice-3" });
         t3mods.Add(new ModuleData() { type = "fire-2" });
-        Towers.Add(new TowerData() { Id = 3, Name = "FCL", Latitude = 48.059039f, Longitude = 8.201796f, Modules = t3mods} );
+        Towers.Add(new TowerData()
+        {
+            Id = 3,
+            Name = "FCL",
+            Latitude = 48.059039f,
+            Longitude = 8.201796f,
+            Rotation = -170,
+            Modules = t3mods
+        });
         var t4mods = new List<ModuleData>();
         t4mods.Add(new ModuleData() { type = "ice-3" });
-        t4mods.Add(new ModuleData() { type = "fire-3" });
+        t4mods.Add(new ModuleData() { type = "fire-1" });
         t4mods.Add(new ModuleData() { type = "ice-3" });
+        t4mods.Add(new ModuleData() { type = "fire-2" });
         t4mods.Add(new ModuleData() { type = "fire-3" });
-        Towers.Add(new TowerData() { Id = 4, Name="I-Bau", Latitude = 48.049796f, Longitude = 8.211025f, Modules = t4mods});
+        Towers.Add(new TowerData()
+        {
+            Id = 4,
+            Name = "I-Bau",
+            Latitude = 48.049796f,
+            Longitude = 8.211025f,
+            Rotation = -120,
+            Modules = t4mods
+        });
         CurrentGpsPosition = new Helper.LocationData();
     }
 	
