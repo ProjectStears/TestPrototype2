@@ -32,3 +32,6 @@ sysinfo.txt
 # kdiff backups
 *.orig
 *.orig.meta
+
+# JetBrains Rider IDE
+/.idea/
