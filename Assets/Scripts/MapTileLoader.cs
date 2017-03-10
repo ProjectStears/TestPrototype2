@@ -9,6 +9,7 @@ public class MapTileLoader : MonoBehaviour
     private Vector2 _pos;
     private bool _startLoading;
     private float _timeoutTimer;
+    public Sprite errorSprite;
 
     public Vector2 Pos
     {
@@ -50,8 +51,17 @@ public class MapTileLoader : MonoBehaviour
         yield return www;
 
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-        var tex = www.texture;
-        tex.filterMode = Config.MapFilterMode;
-        renderer.sprite = Sprite.Create(tex, new Rect(0, 0, 256, 256), new Vector2(0, 0), 256);
+
+        if (!string.IsNullOrEmpty(www.error))
+        {
+            Debug.Log(www.error);
+            renderer.sprite = errorSprite;
+        }
+        else
+        {
+            var tex = www.texture;
+            tex.filterMode = Config.MapFilterMode;
+            renderer.sprite = Sprite.Create(tex, new Rect(0, 0, 256, 256), new Vector2(0, 0), 256);
+        }
     }
 }
